@@ -175,7 +175,10 @@
         <h2>도로 위의 캔버스, 내 차를 새롭게 그리다</h2>
         <p class="desc">차량을 나만의 공간으로 꾸미고자 하는 디테일한 니즈에 집중했습니다.
           <br>시각적인 몰입도를 높이는 모던한 UI와 탐색부터 구매까지 끊김 없는 매끄러운 경험을 제공하는 맞춤형 차량용품 쇼핑몰입니다.</p>
-        <a href="https://autocanvas-sigma.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-pill">See What I Make</a>
+        <div class="project-btn-group">
+          <a href="https://autocanvas-sigma.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-pill">See What I Make</a>
+          <a href="https://ac-webp.vercel.app/" class="btn-pill">See the Process</a>
+        </div>
       </div>
     </div>
   </section>
@@ -231,7 +234,10 @@
         <h2>비 오는 날의 완벽한 파트너, 나만의 우산 비서</h2>
         <p class="desc">바쁜 일상 속, 더 이상 우산을 깜빡하지 마세요. 귀여운 오리 비서가 당신의 일정을 분석해 비가 오기 전 우산을 챙길 수 있도록 세심하게 알려드립니다.
           <br>당신의 하루가 더 안심할 수 있도록 도울게요.</p>
-        <a href="https://usanbiseo.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-pill">See What I Make</a>
+        <div class="project-btn-group">
+          <a href="https://usanbiseo.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-pill">See What I Make</a>
+          <a href="https://ub-webp.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-pill">See the Process</a>
+        </div>
       </div>
     </div>
   </section>
@@ -277,8 +283,6 @@
       <div class="feature3-group">
         <div class="feature3-left">
           <img src="img/pro3-main.png" alt="Project 3 Monitor" class="pro3-img" />
-        </div>
-        
         </div>
       </div>
     </div>
@@ -458,9 +462,6 @@
           </div>
         </div>
       </div>
-
-      <!-- 구분선
-      <div class="sec8-divider"></div> -->
 
       <!-- 하단 (AI Content System Flow) -->
       <div class="sec8-bottom">
@@ -752,14 +753,6 @@
       z-index: 2;
     }
 
-    .hero-badge .tag {
-      font-size: 9px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      opacity: 0.75;
-      margin-bottom: 6px;
-    }
-
     .hero-badge .title {
       font-family: 'Cormorant Garamond', serif;
       font-size: 20px;
@@ -818,7 +811,6 @@
       opacity: 1;
       transition: opacity 0.6s ease;
     }
-    #keybox-1:hover .kb1-img-default { opacity: 0; }
     #keybox-1:hover .kb1-img-hover   { opacity: 1; }
 
     /* keybox-1 : 기본 흰색 덮개 + 텍스트, 호버 시 이미지 노출 */
@@ -936,34 +928,6 @@
       transition: opacity 0.4s ease;
     }
     #keybox-3:hover .kb3-text { opacity: 0; }
-
-    .product-label {
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--mid);
-      margin-bottom: 4px;
-    }
-
-    .product-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 24px;
-      font-weight: 400;
-      margin-bottom: 8px;
-    }
-
-    .product-desc {
-      font-size: 12px;
-      color: var(--light-txt);
-      line-height: 1.7;
-      margin-bottom: 16px;
-    }
-
-    .product-price {
-      font-size: 13px;
-      color: var(--dark);
-      font-weight: 500;
-    }
 
     /* 3. ABOUT ME */
     .about-section {
@@ -1130,41 +1094,6 @@
     .about-skills-panel:has(.col-3:hover) .col-2 p,
     .about-skills-panel:has(.col-3:hover) .col-3 p {
       color: #ffffff;
-    }
-
-    .btn-outline {
-      display: inline-block;
-      padding: 10px 24px;
-      border: 1px solid rgba(255,255,255,0.6);
-      font-size: 10px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: #fff;
-      text-decoration: none;
-      transition: background 0.25s, color 0.25s;
-    }
-
-    .btn-outline:hover {
-      background: #fff;
-      color: var(--dark);
-    }
-
-    .btn-dark {
-      display: inline-block;
-      padding: 11px 28px;
-      background: var(--dark);
-      border: 1px solid var(--dark);
-      font-size: 10px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: #fff;
-      text-decoration: none;
-      transition: background 0.25s, color 0.25s;
-    }
-
-    .btn-dark:hover {
-      background: transparent;
-      color: var(--dark);
     }
 
     /* 4 & 5. SPLIT: IMAGE LEFT / TEXT RIGHT */
@@ -1616,6 +1545,13 @@
       word-break: keep-all;
     }
 
+    .feature-text-custom .project-btn-group {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
     .feature-text-custom .btn-pill {
       font-family: 'Manrope', sans-serif;
       display: inline-block;
@@ -1632,38 +1568,6 @@
     .feature-text-custom .btn-pill:hover {
       background: #222222;
       color: #ffffff;
-    }
-
-    .split-text {
-      background: var(--cream);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 60px 56px;
-    }
-
-    .split-text .eyebrow {
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--light-txt);
-      margin-bottom: 14px;
-    }
-
-    .split-text h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 38px;
-      font-weight: 400;
-      line-height: 1.2;
-      margin-bottom: 18px;
-    }
-
-    .split-text p {
-      font-size: 13px;
-      line-height: 1.85;
-      color: var(--mid);
-      max-width: 380px;
-      margin-bottom: 32px;
     }
 
     /* 7. RHODE + YOU SOCIAL SECTION */
@@ -1746,7 +1650,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      width: 90%;
+      width: 80%;
+      max-width: 960px;
       margin: 0 auto 24px;
     }
 
@@ -1788,15 +1693,6 @@
       background: #2c2825;
       color: #ffffff;
       border-color: #2c2825;
-    }
-
-    .rhode-social-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 80%;
-      max-width: 960px;
-      margin: 0 auto 24px;
     }
 
     .rhode-social-grid {
@@ -1877,9 +1773,6 @@
 
     .social-card.card-stack-interactive .layer-1 { z-index: 9; }
     .social-card.card-stack-interactive .layer-2 { z-index: 8; }
-    .social-card.card-stack-interactive .layer-3 { z-index: 7; }
-    .social-card.card-stack-interactive .layer-4 { z-index: 6; }
-    .social-card.card-stack-interactive .layer-5 { z-index: 5; }
 
     .social-card.gallery2-card {
       cursor: grab;
@@ -2131,14 +2024,6 @@
       line-height: 1.5;
     }
 
-    /* 구분선 */
-    .sec8-divider {
-      width: 100%;
-      height: 1px;
-      background: #d6cfc6;
-      margin-bottom: 32px;
-    }
-
     /* 하단 AI Content System Flow */
     .sec8-bottom {
       display: flex;
@@ -2149,17 +2034,6 @@
 
     .sec8-bottom-header {
       margin-bottom: 36px;
-    }
-
-    .sec8-wf-label {
-      font-family: 'Manrope', sans-serif;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #8c857e;
-      display: block;
-      margin-bottom: 8px;
     }
 
     .sec8-wf-sub {
@@ -2414,27 +2288,6 @@
       transform: translate(14px, 14px) scale(1);
     }
 
-    /* 9. CONTACT */
-    .logo-section {
-      margin: 16px 40px 0;
-      padding: 40px 40px 0;
-      text-align: center;
-      overflow: hidden;
-      border-radius: 12px;
-    }
-
-    .logo-section .big-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(80px, 18vw, 220px);
-      font-weight: 300;
-      letter-spacing: -0.02em;
-      text-transform: lowercase;
-      color: var(--dark);
-      line-height: 1;
-      opacity: 0.06;
-      user-select: none;
-    }
-
     /* FOOTER / CONTINUE SECTION (섹션 8과 동일한 박스 & #EDE9E3 배경) */
     .rhode-footer-sec {
       margin: 16px 40px 40px;
@@ -2603,9 +2456,6 @@
       color: rgba(255, 255, 255, 0.45);
     }
 
-    /* 레이아웃 고정 – 화면 너비에 관계없이 데스크톱 레이아웃 유지 */
-    body { min-width: 1200px; }
-
     /* ── 네이티브 스크롤바 숨김 ── */
     html {
       scrollbar-width: none;       /* Firefox */
@@ -2721,8 +2571,6 @@
       <span id="cscroll-pct">0%</span>
     </div>
   </div>
-
-</body>
 
 <script>
   /* ── Nav 및 Nav-Logo 인터랙션 (로고만 바로 다시 올라감) ── */
@@ -3340,7 +3188,6 @@
 
     /* ── 2. 갤러리 2 (Gallery 2) 호버 컨트롤러 ── */
     if (g2Card) {
-      const rightBox = document.getElementById('rightBox') || g2Card;
       const g2Main = g2Card.querySelector('.img-main');   // wor6-011
       const g2Layer1 = g2Card.querySelector('.layer-1'); // wor6-012
       const g2Layer2 = g2Card.querySelector('.layer-2'); // wor6-013
@@ -3570,4 +3417,5 @@
   })();
 </script>
 
+</body>
 </html>
