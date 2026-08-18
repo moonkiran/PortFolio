@@ -14,6 +14,11 @@
 </head>
 <body>
 
+  <!-- GLOBAL CUSTOM CURSOR -->
+  <div class="custom-cursor" id="customCursor">
+    <span class="cursor-text"></span>
+  </div>
+
   <!-- NAV -->
   <nav>
     <ul class="nav-links">
@@ -1589,6 +1594,49 @@
       color: #ffffff;
     }
 
+    /* ── 전역 커스텀 커서 (Difference Blend Minimal Ring - 섹션 2, 7 제외) ── */
+    body, a, button, [role="button"], input, select, textarea, .sec8-card {
+      cursor: none !important;
+    }
+
+    .custom-cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 24px;
+      height: 24px;
+      margin-top: -12px;
+      margin-left: -12px;
+      border-radius: 50%;
+      background: #ffffff;
+      mix-blend-mode: difference;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 999999;
+      opacity: 0;
+      transition:
+        opacity 0.18s ease-out,
+        width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+        height 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+        margin 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, width, height, margin;
+    }
+
+    .custom-cursor.visible {
+      opacity: 1;
+    }
+
+    /* 링크, 버튼, 카드 호버 시 부드러운 확장 */
+    .custom-cursor.is-hover {
+      width: 54px;
+      height: 54px;
+      margin-top: -27px;
+      margin-left: -27px;
+    }
+
+    /* ── 섹션 7 전용 커스텀 커서 ── */
     .rhode-social-section * {
       cursor: none !important;
     }
@@ -1796,6 +1844,14 @@
       border-radius: 0;
       min-height: 100%;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      transition: background 0.25s ease-out, border-color 0.25s ease-out, box-shadow 0.25s ease-out;
+    }
+
+    .rhode-social-section:hover .social-card.placeholder-card,
+    .rhode-social-section.is-hovered .social-card.placeholder-card {
+      background: #000000;
+      border-color: #ffffff;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
     }
 
     .social-card .placeholder-content {
@@ -1813,6 +1869,12 @@
       text-transform: uppercase;
       color: #7a736d;
       font-weight: 600;
+      transition: color 0.25s ease-out;
+    }
+
+    .rhode-social-section:hover .social-card .placeholder-tag,
+    .rhode-social-section.is-hovered .social-card .placeholder-tag {
+      color: rgba(255, 255, 255, 0.65);
     }
 
     .social-card .placeholder-title {
@@ -1822,6 +1884,12 @@
       letter-spacing: -0.02em;
       color: #111111;
       margin-bottom: 18px;
+      transition: color 0.25s ease-out;
+    }
+
+    .rhode-social-section:hover .social-card .placeholder-title,
+    .rhode-social-section.is-hovered .social-card .placeholder-title {
+      color: #ffffff;
     }
 
     .social-card .placeholder-desc {
@@ -1829,6 +1897,12 @@
       font-size: 15px;
       color: #6b6460;
       line-height: 1.5;
+      transition: color 0.25s ease-out;
+    }
+
+    .rhode-social-section:hover .social-card .placeholder-desc,
+    .rhode-social-section.is-hovered .social-card .placeholder-desc {
+      color: #ffffff;
     }
 
     .rhode-social-footer {
@@ -3022,7 +3096,6 @@
     let currentY = -1000;
     let isInside = false;
 
-    // 빠른 스크롤 시에도 마우스 위치와 섹션 영역 접촉 여부를 초고속 실시간 평가
     function checkPointerSection() {
       if (mouseX < 0 || mouseY < 0) return;
 
@@ -3072,7 +3145,6 @@
         currentX += (mouseX - currentX) * 0.25;
         currentY += (mouseY - currentY) * 0.25;
 
-        // 섹션 7 경계 밖으로 88px 커서 원형(반지름 44px)이 1px도 넘어가지 않도록 하드 클램핑
         const rect = section.getBoundingClientRect();
         const isDot = cursor.classList.contains('is-small-dot');
         const radius = isDot ? 6 : 44;
@@ -3081,6 +3153,84 @@
         const clampedY = Math.max(rect.top + radius, Math.min(rect.bottom - radius, currentY));
 
         cursor.style.transform = `translate3d(${clampedX.toFixed(2)}px, ${clampedY.toFixed(2)}px, 0)`;
+      }
+      requestAnimationFrame(render);
+    }
+    requestAnimationFrame(render);
+  })();
+</script>
+
+<script>
+  /* ── 전역 커스텀 커서 (Difference Blend Minimal Ring) - 섹션 2 & 7 제외 ── */
+  (function () {
+    const cursor = document.getElementById('customCursor');
+    if (!cursor) return;
+
+    const sec2 = document.getElementById('products');
+    const sec7 = document.getElementById('gallery');
+
+    let mouseX = -100;
+    let mouseY = -100;
+    let currentX = -100;
+    let currentY = -100;
+    let isVisible = false;
+
+    function isExcluded(elem) {
+      if (!elem) return false;
+      return (sec2 && (sec2 === elem || sec2.contains(elem))) || (sec7 && (sec7 === elem || sec7.contains(elem)));
+    }
+
+    function updateCursorState() {
+      if (mouseX < 0 || mouseY < 0) return;
+
+      const elem = document.elementFromPoint(mouseX, mouseY);
+      if (!elem || isExcluded(elem)) {
+        cursor.classList.remove('visible');
+        return;
+      }
+
+      if (!isVisible) {
+        isVisible = true;
+      }
+      cursor.classList.add('visible');
+
+      const isInteractive = elem.closest('a, button, [role="button"], .editorial-trigger, .editorial-trigger2, .editorial-trigger3, .sec8-card, .btn-pill, .panel-col, .sec8-flow-col');
+      if (isInteractive) {
+        cursor.classList.add('is-hover');
+      } else {
+        cursor.classList.remove('is-hover');
+      }
+    }
+
+    window.addEventListener('mousemove', function (e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      const elem = document.elementFromPoint(mouseX, mouseY);
+      if (!isVisible && !isExcluded(elem)) {
+        isVisible = true;
+        cursor.classList.add('visible');
+        currentX = mouseX;
+        currentY = mouseY;
+      }
+      updateCursorState();
+    });
+
+    window.addEventListener('scroll', updateCursorState, { passive: true });
+
+    document.addEventListener('mouseleave', function () {
+      isVisible = false;
+      cursor.classList.remove('visible');
+    });
+
+    document.addEventListener('mouseenter', function () {
+      updateCursorState();
+    });
+
+    function render() {
+      if (isVisible) {
+        currentX += (mouseX - currentX) * 0.32;
+        currentY += (mouseY - currentY) * 0.32;
+        cursor.style.transform = `translate3d(${currentX.toFixed(2)}px, ${currentY.toFixed(2)}px, 0)`;
       }
       requestAnimationFrame(render);
     }
