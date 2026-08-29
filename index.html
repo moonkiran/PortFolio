@@ -255,7 +255,6 @@
   <!-- 6. Design & Content -->
   <section class="sec6-section" id="feature3">
     <div class="sec6-wrapper">
-''
       <!-- 왼쪽 박스: Banila.co -->
       <div class="sec6-box sec6-box--left">
         <div class="sec6-meta">
@@ -334,7 +333,7 @@
             귀여운 트위티 요소는 히어로 섹션의 시각적 후킹 포인트로 활용하고, 젠틀몬스터의 쿨한 톤앤매너를 해치지 않도록 
             <br>깔끔한 이미지배치를 통해 브랜드 아이덴티티를 부각한 페이지
           </p>
-          <a href="#" target="_blank" rel="noopener noreferrer" class="sec6-btn">See What I Make</a>
+          <a href="https://tweety-gentle-col.vercel.app/" target="_blank" rel="noopener noreferrer" class="sec6-btn">See What I Make</a>
         </div>
       </div>
 
@@ -660,7 +659,9 @@
     /* NAV */
     nav {
       position: fixed;
-      top: 0; left: 0; right: 0;
+      top: 0; left: 0;
+      width: 100%;
+      min-width: 1200px;
       z-index: 100;
       display: flex;
       align-items: center;
@@ -1337,22 +1338,30 @@
       margin: 16px 40px 0;
     }
 
-    .sec6-wrapper {
-      display: flex;
-      gap: 16px;
-      height: 620px;
+    #feature3 .sec6-wrapper {
+      position: relative !important;
+      overflow: hidden !important;
+      display: grid !important;
+      grid-template-columns: 1fr 1fr !important;
+      padding: 0 !important;
+      background: transparent !important;
+      border-radius: 0 !important;
+      gap: 16px !important;
+      height: 620px !important;
+      box-sizing: border-box !important;
     }
 
-    .sec6-box {
-      flex: 1;
-      border-radius: 12px;
-      overflow: hidden;
-      background: #ffffff;
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      display: flex;
-      flex-direction: column;
-      padding: 32px 36px 36px;
-      box-sizing: border-box;
+    #feature3 .sec6-box {
+      flex: 1 !important;
+      height: 100% !important;
+      border-radius: 12px !important;
+      overflow: hidden !important;
+      background: #ffffff !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      display: flex !important;
+      flex-direction: column !important;
+      padding: 32px 36px 36px !important;
+      box-sizing: border-box !important;
     }
 
     /* 상단: PROJECT DETAILS 토글 */
@@ -2620,12 +2629,32 @@
       color: rgba(255, 255, 255, 0.45);
     }
 
-    /* ── 네이티브 스크롤바 숨김 ── */
+    /* ── 네이티브 세로 스크롤바만 숨기고 가로 스크롤바는 표시 ── */
     html {
-      scrollbar-width: none;       /* Firefox */
+      overflow-x: auto;
     }
+    
+    /* Chrome, Safari, Edge 등 Webkit 기반 브라우저 */
     html::-webkit-scrollbar {
-      display: none;               /* Chrome / Safari / Edge */
+      width: 0px !important;  /* 세로 스크롤바 숨김 */
+      height: 10px !important; /* 가로 스크롤바 표시 */
+    }
+    html::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.35) !important;
+      border-radius: 99px !important;
+    }
+    html::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.55) !important;
+    }
+    html::-webkit-scrollbar-track {
+      background: #111111 !important;
+    }
+
+    /* Firefox 전용 (가로/세로 분리가 불가능하므로 스크롤 충돌 방지차 숨김) */
+    @supports (-moz-appearance: none) {
+      html {
+        scrollbar-width: none;
+      }
     }
 
     /* ── 커스텀 스크롤바 ── */
@@ -2768,6 +2797,9 @@
       } else {
         nav.classList.add('nav-hidden');
       }
+
+      // 가로 스크롤 시 nav도 동기화하여 함께 좌우로 이동
+      nav.style.left = `${-window.scrollX}px`;
     }, { passive: true });
 
     // 페이지 첫 로드 시에도 로고가 함께 내려왔다가 바로 쏙 올라감
